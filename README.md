@@ -53,25 +53,13 @@ Evaluate the model with test accuracy, confusion matrix, classification report, 
 ```python
 
 print(f"Total number of test samples: {len(test_dataset)}")
-
-# Get the shape of the first image in the dataset
 first_image1,label=test_dataset[0]
 print("Image shape:",first_image1.shape)
 
 model=models.vgg19(weights=VGG19_Weights.DEFAULT)
-
-
-# Modify the final fully connected layer to match the dataset classes
-
 model.classifier[-1]=nn.Linear(model.classifier[-1].in_features,1)
-
-
-# Include the Loss function and optimizer
-
 criterion = nn.BCEWithLogitsLoss()
 optimizer = optim.Adam(model.parameters(),lr=0.001)
-
-# Train the model
 
 def train_model(model, train_loader,test_loader,num_epochs=10):
     train_losses=[]
@@ -104,8 +92,6 @@ def train_model(model, train_loader,test_loader,num_epochs=10):
 
         print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_losses[-1]:.4f}, Validation Loss: {val_losses[-1]:.4f}')
 
-# Train the model
-# Write your code here
 train_model(model,train_loader,test_loader)
 
 test_model(model, test_loader)
