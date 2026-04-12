@@ -51,7 +51,12 @@ Evaluate the model with test accuracy, confusion matrix, classification report, 
 ### Register Number: 212224040082
 
 ```python
-# Load Pretrained Model and Modify for Transfer Learning
+
+print(f"Total number of test samples: {len(test_dataset)}")
+
+# Get the shape of the first image in the dataset
+first_image1,label=test_dataset[0]
+print("Image shape:",first_image1.shape)
 
 model=models.vgg19(weights=VGG19_Weights.DEFAULT)
 
@@ -99,20 +104,11 @@ def train_model(model, train_loader,test_loader,num_epochs=10):
 
         print(f'Epoch [{epoch+1}/{num_epochs}], Train Loss: {train_losses[-1]:.4f}, Validation Loss: {val_losses[-1]:.4f}')
 
-    # Plot training and validation loss
-    print("Name:DIVYA LAKSHMI M")
-    print("Register Number: 212224040082")
-    plt.figure(figsize=(8, 6))
-    plt.plot(range(1, num_epochs + 1), train_losses, label='Train Loss', marker='o')
-    plt.plot(range(1, num_epochs + 1), val_losses, label='Validation Loss', marker='s')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
-    plt.title('Training and Validation Loss')
-    plt.legend()
-    plt.show()
 # Train the model
 # Write your code here
 train_model(model,train_loader,test_loader)
+
+test_model(model, test_loader)
 
 ```
 
